@@ -294,11 +294,6 @@ const router = new Router()
 // MIDDLEWARE
 app.use(koaBody())
 app.use(router.routes())
-app.use(router.allowedMethods())
-app.use(async (ctx, next) => {
-	ctx.body = 'Hello Koa'
-	await next()
-})
 
 // ROUTES
 router.post('/users/register', UserController.createUser)
