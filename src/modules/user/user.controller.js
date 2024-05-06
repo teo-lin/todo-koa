@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+const Router = require('@koa/router')
 const UserService = require('./user.service')
 
 class UserController {
@@ -39,7 +39,7 @@ class UserController {
 	static async deleteUser(ctx) {
 		try {
 			await UserService.deleteUser(ctx.params.id)
-			ctx.body = { message: 'List deleted successfully' }
+			ctx.body = { message: 'User deleted successfully' }
 		} catch (error) {
 			ctx.status = 500
 			ctx.body = { message: error.message }		}

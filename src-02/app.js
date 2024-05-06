@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
-const Router = require('koa-router')
+const Router = require('@koa/router')
 const fs = require('fs')
 const path = require('path')
 

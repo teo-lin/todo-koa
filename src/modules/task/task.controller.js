@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+const Router = require('@koa/router')
 const TaskService = require('./task.service')
 
 class TaskController {
