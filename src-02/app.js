@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const koaBody = require('koa-body').default
+const { koaBody } = require('koa-body')
 const Router = require('koa-router')
 const fs = require('fs')
 const path = require('path')
