@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const { koaBody } = require('koa-body')
+const bodyParser = require('koa-bodyparser')
 const userRouter = require('./modules/user/user.controller')
 const taskRouter = require('./modules/task/task.controller')
 const listRouter = require('./modules/list/list.controller')
@@ -10,7 +10,7 @@ const app = new Koa()
 const PORT = 3333
 
 // MIDDLEWARE
-app.use(koaBody())
+app.use(bodyParser())
 app.use(userRouter.routes())
 app.use(taskRouter.routes())
 app.use(listRouter.routes())

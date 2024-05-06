@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const { koaBody } = require('koa-body')
+const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const fs = require('fs')
 const path = require('path')
@@ -290,7 +290,7 @@ const app = new Koa()
 const router = new Router()
 
 // MIDDLEWARE
-app.use(koaBody())
+app.use(bodyParser())
 app.use(router.routes())
 
 // ROUTES
