@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const bodyParser = require('koa-bodyparser')
+const { bodyParser } = require('@koa/bodyparser');
 const Router = require('@koa/router')
 const fs = require('fs')
 const path = require('path')
@@ -168,14 +168,14 @@ class UserService {
 		usersData.users.push(newUser)
 		usersData.lastUserId = nextUserId
 		DatabaseService.setData(PATH, usersData)
-		delete newUser.passWord
+		delete newUser.password
 		return newUser
 	}
 
 	static async retrieveUser(userId) {
 		const usersData = DatabaseService.getData(PATH)
 		const user = usersData.users.find((user) => user.userId === userId)
-		delete user.passWord
+		delete user.password
 		return user
 	}
 
@@ -188,7 +188,7 @@ class UserService {
 		usersData.users[userIndex] = { ...usersData.users[userIndex], ...userData }
 		DatabaseService.setData(PATH, usersData)
 		const user = usersData.users[userIndex]
-		delete user.passWord
+		delete user.password
 		return user
 	}
 
