@@ -13,11 +13,11 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/teo-lin/todo-template"
+    "url": "https://github.com/teo-lin/todo-koa"
   },
   "config": {
     "port": "3333",
-    "framework": "vanilla"
+    "framework": "Koa"
   },
   "scripts": {
     "start": "node src/app.js",
