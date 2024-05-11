@@ -11,6 +11,10 @@ const PORT = 3333
 
 // MIDDLEWARE
 app.use(bodyParser())
+app.use(async (ctx) => {
+  ctx.status = 404
+  ctx.body = { message: 'Route not found' }
+})
 
 // ROUTES
 app.use(userRouter.routes())

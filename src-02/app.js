@@ -273,6 +273,10 @@ const router = new Router()
 // MIDDLEWARE
 app.use(bodyParser())
 app.use(router.routes())
+app.use(async (ctx) => {
+  ctx.status = 404
+  ctx.body = { message: 'Route not found' }
+})
 
 // ROUTES
 router.post('/users/register', UserController.createUser)
