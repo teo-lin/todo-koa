@@ -2,9 +2,9 @@ const Router = require('@koa/router')
 const TaskService = require('./task.service')
 
 class TaskController {
-  static async createTask(ctx) {
+  static createTask(ctx) {
     try {
-      const newTask = await TaskService.createTask(ctx.request.body)
+      const newTask = TaskService.createTask(ctx.request.body)
       ctx.status = 201
       ctx.body = newTask
     } catch (error) {
@@ -13,9 +13,9 @@ class TaskController {
     }
   }
 
-  static async retrieveTask(ctx) {
+  static retrieveTask(ctx) {
     try {
-      const task = await TaskService.retrieveTask(ctx.params.id)
+      const task = TaskService.retrieveTask(ctx.params.id)
       if (!task) ctx.throw(404, 'Task not found')
       ctx.body = task
     } catch (error) {
@@ -24,9 +24,9 @@ class TaskController {
     }
   }
 
-  static async updateTask(ctx) {
+  static updateTask(ctx) {
     try {
-      const updatedTask = await TaskService.updateTask(ctx.params.id, ctx.request.body)
+      const updatedTask = TaskService.updateTask(ctx.params.id, ctx.request.body)
       ctx.body = updatedTask
     } catch (error) {
       ctx.status = 500
@@ -34,9 +34,9 @@ class TaskController {
     }
   }
 
-  static async deleteTask(ctx) {
+  static deleteTask(ctx) {
     try {
-      await TaskService.deleteTask(ctx.params.id)
+      TaskService.deleteTask(ctx.params.id)
       ctx.body = { message: 'Task deleted successfully' }
     } catch (error) {
       ctx.status = 500
@@ -44,10 +44,10 @@ class TaskController {
     }
   }
 
-  static async completeTask(ctx) {
+  static completeTask(ctx) {
     try {
       const taskId = ctx.params.id
-      const task = await TaskService.completeTask(taskId)
+      const task = TaskService.completeTask(taskId)
       if (!task) ctx.throw(404, 'Task not found')
       ctx.body = task
     } catch (error) {

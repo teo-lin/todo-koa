@@ -2,9 +2,9 @@ const Router = require('@koa/router')
 const UserService = require('./user.service')
 
 class UserController {
-  static async createUser(ctx) {
+  static createUser(ctx) {
     try {
-      const newUser = await UserService.createUser(ctx.request.body)
+      const newUser = UserService.createUser(ctx.request.body)
       ctx.status = 201
       ctx.body = newUser
     } catch (error) {
@@ -13,9 +13,9 @@ class UserController {
     }
   }
 
-  static async retrieveUser(ctx) {
+  static retrieveUser(ctx) {
     try {
-      const user = await UserService.retrieveUser(ctx.params.id)
+      const user = UserService.retrieveUser(ctx.params.id)
       if (!user) ctx.throw(404, 'User not found')
       ctx.body = user
     } catch (error) {
@@ -24,9 +24,9 @@ class UserController {
     }
   }
 
-  static async updateUser(ctx) {
+  static updateUser(ctx) {
     try {
-      const updatedUser = await UserService.updateUser(ctx.params.id, ctx.request.body)
+      const updatedUser = UserService.updateUser(ctx.params.id, ctx.request.body)
       ctx.body = updatedUser
     } catch (error) {
       ctx.status = 500
@@ -34,9 +34,9 @@ class UserController {
     }
   }
 
-  static async deleteUser(ctx) {
+  static deleteUser(ctx) {
     try {
-      await UserService.deleteUser(ctx.params.id)
+      UserService.deleteUser(ctx.params.id)
       ctx.body = { message: 'User deleted successfully' }
     } catch (error) {
       ctx.status = 500

@@ -2,9 +2,9 @@ const Router = require('@koa/router')
 const ListService = require('./list.service')
 
 class ListController {
-  static async createList(ctx) {
+  static createList(ctx) {
     try {
-      const newList = await ListService.createList(ctx.request.body)
+      const newList = ListService.createList(ctx.request.body)
       ctx.status = 201
       ctx.body = newList
     } catch (error) {
@@ -13,9 +13,9 @@ class ListController {
     }
   }
 
-  static async retrieveList(ctx) {
+  static retrieveList(ctx) {
     try {
-      const list = await ListService.retrieveList(ctx.params.id)
+      const list = ListService.retrieveList(ctx.params.id)
       if (!list) ctx.throw(404, 'List not found')
       ctx.body = list
     } catch (error) {
@@ -24,9 +24,9 @@ class ListController {
     }
   }
 
-  static async updateList(ctx) {
+  static updateList(ctx) {
     try {
-      const updatedList = await ListService.updateList(ctx.params.id, ctx.request.body)
+      const updatedList = ListService.updateList(ctx.params.id, ctx.request.body)
       ctx.body = updatedList
     } catch (error) {
       ctx.status = 500
@@ -34,9 +34,9 @@ class ListController {
     }
   }
 
-  static async deleteList(ctx) {
+  static deleteList(ctx) {
     try {
-      await ListService.deleteList(ctx.params.id)
+      ListService.deleteList(ctx.params.id)
       ctx.body = { message: 'List deleted successfully' }
     } catch (error) {
       ctx.status = 500
