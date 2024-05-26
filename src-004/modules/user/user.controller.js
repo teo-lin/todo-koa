@@ -45,7 +45,7 @@ class UserController {
   }
 }
 
-const userRouter = new Router({ prefix: '/users' })
+const userRouter = new Router({ prefix: '/api/users' })
 userRouter.post('/register', UserController.createUser)
 userRouter.get('/user/:id', UserController.retrieveUser)
 userRouter.put('/user/:id', UserController.updateUser)

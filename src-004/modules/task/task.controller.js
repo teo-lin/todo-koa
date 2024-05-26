@@ -57,7 +57,7 @@ class TaskController {
   }
 }
 
-const taskRouter = new Router({ prefix: '/tasks' })
+const taskRouter = new Router({ prefix: '/api/tasks' })
 taskRouter.post('/create', TaskController.createTask)
 taskRouter.get('/task/:id', TaskController.retrieveTask)
 taskRouter.put('/task/:id', TaskController.updateTask)

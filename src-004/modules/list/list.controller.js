@@ -45,7 +45,7 @@ class ListController {
   }
 }
 
-const listRouter = new Router({ prefix: '/lists' })
+const listRouter = new Router({ prefix: '/api/lists' })
 listRouter.post('/create', ListController.createList)
 listRouter.get('/list/:id', ListController.retrieveList)
 listRouter.put('/list/:id', ListController.updateList)
