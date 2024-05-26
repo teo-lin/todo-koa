@@ -7,7 +7,7 @@ const DatabaseService = require('./modules/database/database.service')
 
 // ROUTER
 const app = new Koa()
-const PORT = 3333
+const PORT = 3000
 
 // MIDDLEWARE
 app.use(bodyParser())
