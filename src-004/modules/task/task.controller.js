@@ -4,9 +4,9 @@ const TaskService = require('./task.service')
 class TaskController {
   static createTask(ctx) {
     try {
-      const newTask = TaskService.createTask(ctx.request.body)
+      const task = TaskService.createTask(ctx.request.body)
       ctx.status = 201
-      ctx.body = newTask
+      ctx.body = task
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -26,8 +26,8 @@ class TaskController {
 
   static updateTask(ctx) {
     try {
-      const updatedTask = TaskService.updateTask(ctx.params.id, ctx.request.body)
-      ctx.body = updatedTask
+      const task = TaskService.updateTask(ctx.params.id, ctx.request.body)
+      ctx.body = task
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }

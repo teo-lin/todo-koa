@@ -9,9 +9,9 @@ const PATH = path.join(__dirname, './db.json')
 class UserController {
   static async createUser(ctx) {
     try {
-      const newUser = await UserService.createUser(ctx.request.body)
+      const user = await UserService.createUser(ctx.request.body)
       ctx.status = 201
-      ctx.body = newUser
+      ctx.body = user
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -31,8 +31,8 @@ class UserController {
 
   static async updateUser(ctx) {
     try {
-      const updatedUser = await UserService.updateUser(ctx.params.id, ctx.request.body)
-      ctx.body = updatedUser
+      const user = await UserService.updateUser(ctx.params.id, ctx.request.body)
+      ctx.body = user
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -52,9 +52,9 @@ class UserController {
 class TaskController {
   static async createTask(ctx) {
     try {
-      const newTask = await TaskService.createTask(ctx.request.body)
+      const task = await TaskService.createTask(ctx.request.body)
       ctx.status = 201
-      ctx.body = newTask
+      ctx.body = task
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -74,8 +74,8 @@ class TaskController {
 
   static async updateTask(ctx) {
     try {
-      const updatedTask = await TaskService.updateTask(ctx.params.id, ctx.request.body)
-      ctx.body = updatedTask
+      const task = await TaskService.updateTask(ctx.params.id, ctx.request.body)
+      ctx.body = task
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -107,9 +107,9 @@ class TaskController {
 class ListController {
   static async createList(ctx) {
     try {
-      const newList = await ListService.createList(ctx.request.body)
+      const list = await ListService.createList(ctx.request.body)
       ctx.status = 201
-      ctx.body = newList
+      ctx.body = list
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -129,8 +129,8 @@ class ListController {
 
   static async updateList(ctx) {
     try {
-      const updatedList = await ListService.updateList(ctx.params.id, ctx.request.body)
-      ctx.body = updatedList
+      const list = await ListService.updateList(ctx.params.id, ctx.request.body)
+      ctx.body = list
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -153,12 +153,12 @@ class UserService {
   static async createUser(userData) {
     const usersData = DatabaseService.getData(PATH)
     const nextUserId = `U${1 + Number(usersData.lastUserId.slice(1))}`
-    const newUser = { userId: nextUserId, ...userData }
-    usersData.users.push(newUser)
+    const user = { userId: nextUserId, ...userData }
+    usersData.users.push(user)
     usersData.lastUserId = nextUserId
     DatabaseService.setData(PATH, usersData)
-    delete newUser.password
-    return newUser
+    delete user.password
+    return user
   }
 
   static async retrieveUser(userId) {
@@ -189,11 +189,11 @@ class ListService {
   static async createList(listData) {
     const listsData = DatabaseService.getData(PATH)
     const nextListId = `L${1 + Number(listsData.lastListId.slice(1))}`
-    const newList = { listId: nextListId, ...listData }
-    listsData.lists.push(newList)
+    const list = { listId: nextListId, ...listData }
+    listsData.lists.push(list)
     listsData.lastListId = nextListId
     DatabaseService.setData(PATH, listsData)
-    return newList
+    return list
   }
 
   static async retrieveList(listId) {
@@ -220,11 +220,11 @@ class TaskService {
   static async createTask(taskData) {
     const tasksData = DatabaseService.getData(PATH)
     const nextTaskId = `T${1 + Number(tasksData.lastTaskId.slice(1))}`
-    const newTask = { taskId: nextTaskId, ...taskData }
-    tasksData.tasks.push(newTask)
+    const task = { taskId: nextTaskId, ...taskData }
+    tasksData.tasks.push(task)
     tasksData.lastTaskId = nextTaskId
     DatabaseService.setData(PATH, tasksData)
-    return newTask
+    return task
   }
 
   static async retrieveTask(taskId) {

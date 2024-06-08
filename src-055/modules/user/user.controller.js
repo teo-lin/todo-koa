@@ -4,9 +4,9 @@ const UserService = require('./user.service')
 class UserController {
   static createUser(ctx) {
     try {
-      const newUser = UserService.createUser(ctx.request.body)
+      const user = UserService.createUser(ctx.request.body)
       ctx.status = 201
-      ctx.body = newUser
+      ctx.body = user
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
@@ -26,8 +26,8 @@ class UserController {
 
   static updateUser(ctx) {
     try {
-      const updatedUser = UserService.updateUser(ctx.params.id, ctx.request.body)
-      ctx.body = updatedUser
+      const user = UserService.updateUser(ctx.params.id, ctx.request.body)
+      ctx.body = user
     } catch (error) {
       ctx.status = 500
       ctx.body = { message: error.message }
