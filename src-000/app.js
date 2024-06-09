@@ -5,9 +5,11 @@ const taskRouter = require('./modules/task/task.controller')
 const listRouter = require('./modules/list/list.controller')
 const DatabaseService = require('./modules/database/database.service')
 
+// DATABASE
+DatabaseService.init()
+
 // ROUTER
 const app = new Koa()
-const PORT = 3000
 
 // MIDDLEWARE
 app.use(bodyParser())
@@ -18,5 +20,5 @@ app.use(taskRouter.routes())
 app.use(listRouter.routes())
 
 // SERVER
-DatabaseService.init()
+const PORT = 3000
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))

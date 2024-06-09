@@ -16,11 +16,15 @@ class ListController {
   static retrieveList(ctx) {
     try {
       const list = ListService.retrieveList(ctx.params.id)
-      if (!list) ctx.throw(404, 'List not found')
       ctx.body = list
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'List not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -29,8 +33,13 @@ class ListController {
       const list = ListService.updateList(ctx.params.id, ctx.request.body)
       ctx.body = list
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'List not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -39,8 +48,13 @@ class ListController {
       ListService.deleteList(ctx.params.id)
       ctx.body = { message: 'List deleted successfully' }
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'List not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 }

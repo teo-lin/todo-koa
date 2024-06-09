@@ -16,11 +16,15 @@ class TaskController {
   static retrieveTask(ctx) {
     try {
       const task = TaskService.retrieveTask(ctx.params.id)
-      if (!task) ctx.throw(404, 'Task not found')
       ctx.body = task
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'Task not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -29,8 +33,13 @@ class TaskController {
       const task = TaskService.updateTask(ctx.params.id, ctx.request.body)
       ctx.body = task
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'Task not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -39,8 +48,13 @@ class TaskController {
       TaskService.deleteTask(ctx.params.id)
       ctx.body = { message: 'Task deleted successfully' }
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'Task not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -48,11 +62,15 @@ class TaskController {
     try {
       const taskId = ctx.params.id
       const task = TaskService.completeTask(taskId)
-      if (!task) ctx.throw(404, 'Task not found')
       ctx.body = task
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'Task not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 }

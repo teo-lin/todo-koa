@@ -16,11 +16,15 @@ class UserController {
   static retrieveUser(ctx) {
     try {
       const user = UserService.retrieveUser(ctx.params.id)
-      if (!user) ctx.throw(404, 'User not found')
       ctx.body = user
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'User not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -29,8 +33,13 @@ class UserController {
       const user = UserService.updateUser(ctx.params.id, ctx.request.body)
       ctx.body = user
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'User not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 
@@ -39,8 +48,13 @@ class UserController {
       UserService.deleteUser(ctx.params.id)
       ctx.body = { message: 'User deleted successfully' }
     } catch (error) {
-      ctx.status = 500
-      ctx.body = { message: error.message }
+      if (error.message === 'Not Found') {
+        ctx.status = 404
+        ctx.body = { message: 'User not found' }
+      } else {
+        ctx.status = 500
+        ctx.body = { message: error.message }
+      }
     }
   }
 }
