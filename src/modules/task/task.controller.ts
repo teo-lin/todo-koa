@@ -1,4 +1,4 @@
-import Router from '@koa/router';
+import Router from 'koa-router'
 import { Context } from 'koa';
 import TaskService from './task.service';
 import { Task, NewTask } from '../interfaces';

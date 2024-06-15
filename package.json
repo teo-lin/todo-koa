@@ -23,6 +23,7 @@
     "dev": "nodemon src/app.ts",
     "start": "node src/app.js",
     "start:debug": "nodemon --exec 'node --inspect -r ts-node/register' src/app.ts",
+    "start:build": "node build/app.js",
     "test": "",
     "test:watch": "",
     "test:cov": "",
@@ -34,22 +35,21 @@
     "test:endurance": "k6 run ./k6/endurance.test.js",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
     "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
-    "build": "",
+    "build": "tsc --build tsconfig.json",
     "build:docker": "docker build --tag todo-app .",
     "start:docker": "docker run --detach --name todo-container --publish 3000:3000 --memory 4g --cpus 4 todo-app",
     "setup": "open --background -a Docker && npm run reset && npm install && npm install --global nodemon && docker build --tag todo-app .",
     "reset": "open --background -a Docker && rm -rf node_modules build dist out coverage package-lock.json && docker stop todo-container && docker rm todo-container || true && docker rmi todo-app || true"
   },
-  "dependencies": {
-    "@koa/bodyparser": "^5.1.1",
-    "@koa/router": "^12.0.1",
-    "koa": "^2.15.3"
-  },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/koa__router": "^12.0.4",
-    "@types/koa-router": "^7.4.8",
+    "@types/koa": "^2.13.12",
     "@types/koa-bodyparser": "^4.3.12",
-    "ts-node": "^10.9.2"
+    "@types/koa-router": "^7.4.8",
+    "koa": "^2.14.2",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^12.0.1"
   }
 }
